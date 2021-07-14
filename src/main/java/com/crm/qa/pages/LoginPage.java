@@ -48,10 +48,10 @@ public class LoginPage extends TestBase {
 
 	public HomePage login(String un, String pwd) {
 		if(loginbtn.isDisplayed()) {
-			loginbtn.click();
-			email.sendKeys(un);
-			password.sendKeys(pwd);
-			login.click();
+			  loginbtn.click();
+			  email.sendKeys(un);
+			  password.sendKeys(pwd);
+			  login.click();
 		}else {
 			cookiebutton.isDisplayed();
 			cookiebutton.click();
