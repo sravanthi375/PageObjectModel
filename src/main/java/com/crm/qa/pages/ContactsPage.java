@@ -3,15 +3,20 @@ package com.crm.qa.pages;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.Select;
+import org.testng.Assert;
 
 import com.crm.qa.base.TestBase;
 
 public class ContactsPage extends TestBase {
 
+	public WebDriver driver;
+	LoginPage loginpage;
+	HomePage homepage;
+	
 	@FindBy(xpath = "//div[text()='Contacts']")
 	WebElement contactslabel;
 
@@ -33,10 +38,14 @@ public class ContactsPage extends TestBase {
 	@FindBy(xpath="//i[@class='save icon']")
 	WebElement savebtn;
 
-	public ContactsPage() {
+	public ContactsPage(WebDriver driver) {
+
+	    homepage = new HomePage(driver);
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
 
+	
 	public boolean verifyContactsLabel() {
 		return contactslabel.isDisplayed();
 	}

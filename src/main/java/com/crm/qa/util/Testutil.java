@@ -11,17 +11,25 @@ import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
+import org.openqa.selenium.WebDriver;
 
 import com.crm.qa.base.TestBase;
 
 public class Testutil extends TestBase {
 
+	public  WebDriver driver;
+	
+	public Testutil(WebDriver driver) {
+	
+		this.driver=driver;
+	}
+	
 	public static long Page_Load_TimeOut=50;
 	public static long Implicit_Wait_TimeOut=50;
 	
 	
 	
-	public ArrayList<Object[]> getFreeCRMTestData(String sheetname) throws IOException{
+	public static ArrayList<Object[]> getFreeCRMTestData(String sheetname) throws IOException{
 		
 		ArrayList<Object[]> list=new ArrayList<Object[]>();
 		
@@ -47,12 +55,12 @@ public class Testutil extends TestBase {
 		return list;
 	}
 	
-	public static void takeScreenshotAtEndOfTest() {
+	public  void takeScreenshotAtEndOfTest(String testMethodName) {
 		File file=((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
 		
 		try {
 			FileUtils.copyFile(file, new File("C:\\Sravanthi\\myworkspace\\"
-					+ "FreeCRMTest\\src\\test\\java\\screenshots\\"+ System.currentTimeMillis() +".png"));
+					+ "FreeCRMTest\\src\\test\\java\\screenshots\\"+testMethodName+".png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

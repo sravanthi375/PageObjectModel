@@ -1,18 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Free CRM Test Automation Suite]" guice-stage="DEVELOPMENT">
+<suite parallel="tests" name="Failed suite [Free CRM Test Automation Suite]" guice-stage="DEVELOPMENT">
   <listeners>
-    <listener class-name="com.qa.ExtentreportListener.ExtentReportNG"/>
+    <listener class-name="com.crm.qa.listeners.CustomListener"/>
   </listeners>
-  <test thread-count="5" name="Free CRM App Test Cases(failed)">
+  <test thread-count="5" parallel="tests" name="Free CRM App ContactsPageTest Cases(failed)">
     <classes>
       <class name="com.crm.qa.testcases.ContactsPageTest">
         <methods>
-          <include name="selectContactsNameTest"/>
-          <include name="tearDown"/>
           <include name="setUp"/>
+          <include name="validateContactsLabelTest"/>
+          <include name="tearDown"/>
+          <include name="createContactTest"/>
         </methods>
       </class> <!-- com.crm.qa.testcases.ContactsPageTest -->
     </classes>
-  </test> <!-- Free CRM App Test Cases(failed) -->
+  </test> <!-- Free CRM App ContactsPageTest Cases(failed) -->
+  <test thread-count="5" parallel="tests" name="Free CRM App HomePageTest Cases(failed)">
+    <classes>
+      <class name="com.crm.qa.testcases.HomePageTest">
+        <methods>
+          <include name="clickOnContactsTest"/>
+          <include name="clickOnDealsTest"/>
+          <include name="validateSearchBoxTest"/>
+          <include name="clickOnCallsTest"/>
+          <include name="setUp"/>
+          <include name="tearDown"/>
+          <include name="clickOnLogOutTest"/>
+        </methods>
+      </class> <!-- com.crm.qa.testcases.HomePageTest -->
+    </classes>
+  </test> <!-- Free CRM App HomePageTest Cases(failed) -->
 </suite> <!-- Failed suite [Free CRM Test Automation Suite] -->

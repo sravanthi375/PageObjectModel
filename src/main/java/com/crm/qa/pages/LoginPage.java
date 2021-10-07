@@ -1,5 +1,6 @@
 package com.crm.qa.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -8,6 +9,7 @@ import com.crm.qa.base.TestBase;
 
 public class LoginPage extends TestBase {
 
+	public  WebDriver driver;
 	// Page Factory or Object Repository
 	@FindBy(xpath = "//a[text()='Free CRM']")
 	WebElement logolink;
@@ -28,7 +30,8 @@ public class LoginPage extends TestBase {
 	WebElement cookiebutton;
 
 	// Initializing the page objects
-	public LoginPage() {
+	public LoginPage(WebDriver driver) {
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
 
@@ -46,7 +49,7 @@ public class LoginPage extends TestBase {
 		return logolink.isDisplayed();
 	}
 
-	public HomePage login(String un, String pwd) {
+	public void login(String un, String pwd) {
 		if(loginbtn.isDisplayed()) {
 			  loginbtn.click();
 			  email.sendKeys(un);
@@ -56,7 +59,7 @@ public class LoginPage extends TestBase {
 			cookiebutton.isDisplayed();
 			cookiebutton.click();
 		}
-		return new HomePage();
+	
 	}
 
 }

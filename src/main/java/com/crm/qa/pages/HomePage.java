@@ -2,19 +2,28 @@ package com.crm.qa.pages;
 
 import java.util.List;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.testng.Assert;
 
 import com.crm.qa.base.TestBase;
 
 public class HomePage extends TestBase{
+	
+	public  WebDriver driver;
+	LoginPage loginpage;
 	
 	@FindBy(xpath="//span[text()='sravanthi sandineni']")
 	WebElement userNameLabel;
 	
 	@FindBy(xpath="//input[@placeholder='Search']")
 	WebElement searchBox;
+	
+	@FindBy(xpath ="//div[@id='main-nav']")
+	WebElement contactsicon;
 	
 	@FindBy(xpath="//span[text()='Contacts']")
 	WebElement contactsLink;
@@ -31,8 +40,13 @@ public class HomePage extends TestBase{
 	@FindBy(xpath="//div[@role='listbox']/child::div[@class='menu transition visible']/a")
 	List<WebElement> settingsTab;
 	
-	public  HomePage() {
+	public  HomePage(WebDriver driver) {
+		
+		loginpage = new LoginPage(driver);
+		loginpage.login(prop.getProperty("username"), prop.getProperty("password"));
+		this.driver=driver;
 		PageFactory.initElements(driver, this);
+		clickOnContacts();
 	}
 	
 	public String verifyHomeTitle() {
@@ -48,19 +62,18 @@ public class HomePage extends TestBase{
 		  return word;
 	}
 	
-	public ContactsPage clickOnContacts() {
-		contactsLink.click();
-	    return new ContactsPage();
+	public void clickOnContacts() {
+		Actions a=new Actions(driver);
+	     a.moveToElement(contactsicon).build().perform();
+	     contactsLink.click();
 	}
 	
-	public DealsPage clickOnDeals() {
+	public void clickOnDeals() {
 		dealsLink.click();
-		return new DealsPage();
 	}
 	
-	public CallsPage clickOnCalls() {
+	public void clickOnCalls() {
 		callsLink.click();
-		return new CallsPage();
 	}
 	
 	

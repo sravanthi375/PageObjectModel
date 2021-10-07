@@ -2,38 +2,30 @@ package com.crm.qa.base;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.Duration;
-import java.util.EventListener;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriver.Options;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.remote.CapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.events.EventFiringWebDriver;
-import org.testng.util.TimeUtils;
 
+import com.crm.qa.listeners.WebEventListener;
 import com.crm.qa.util.Testutil;
-import com.crm.qa.util.WebEventListener;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 
-	 public static WebDriver driver;
-	public static Properties prop;
-	public static EventFiringWebDriver e_driver;
-	public static WebEventListener eventlistener;
+	public   WebDriver driver;
+	public  Properties prop;
+	public  EventFiringWebDriver e_driver;
+	public  WebEventListener eventlistener;
 	
 	public TestBase()  {
 		prop=new Properties();
 		try {
-		FileInputStream fis=new FileInputStream("C:\\Sravanthi\\myworkspace\\FreeCRMTest\\"
-				+ "src\\main\\java\\com\\crm\\qa\\config\\config.properties");
+		FileInputStream fis=new FileInputStream("config.properties");
 		prop.load(fis);
 		
 		} catch (IOException e) {
@@ -41,7 +33,7 @@ public class TestBase {
 		}
 	}
 	
-	public static void initialization() {
+	public WebDriver initialization() {
 		String browsername=prop.getProperty("browser");
 		if(browsername.equals("chrome")) {
 			WebDriverManager.chromedriver().setup();
@@ -62,6 +54,8 @@ public class TestBase {
 		driver.manage().timeouts().implicitlyWait(Testutil.Implicit_Wait_TimeOut, TimeUnit.SECONDS);
 		
 		driver.get(prop.getProperty("url"));
+		
+		return driver;
 		
 }
 }	
